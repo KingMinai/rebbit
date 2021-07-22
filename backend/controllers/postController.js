@@ -17,7 +17,7 @@ exports.post_create_post = (req, res, next) => {
   });
 };
 
-exports.post_update_post = (req, res, next) => {
+exports.post_update_post = async (req, res, next) => {
   const update = await Post.findOneAndUpdate(
     { title: req.body.titleOld, content: req.body.contentOld, author: req.user.user.username },
     { title: req.body.titleNew, content: req.body.contentNew }
@@ -25,7 +25,7 @@ exports.post_update_post = (req, res, next) => {
   res.json({ update });
 };
 
-exports.post_delete_post = (req, res, next) => {
+exports.post_delete_post = async (req, res, next) => {
   const del = await Post.findOneAndDelete({
     title: req.body.title,
     content: req.body.content,
