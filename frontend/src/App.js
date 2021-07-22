@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
+import auth from './auth/authService';
 
 import Navbar from './components/navbar';
 import Feed from './components/feed';
@@ -9,9 +10,10 @@ import UserLogin from './components/userLogin';
 import PostCreate from './components/postCreate';
 
 function App() {
+  let isLI = auth.getCurrentUser() ? true : false;
   return (
     <div className='App'>
-      <Navbar />
+      <Navbar isLI={isLI} />
       <Switch>
         <Route exact path='/'>
           <Feed type='home' />

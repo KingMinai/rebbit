@@ -25,11 +25,14 @@ export default class PostCreate extends Component {
 
   handleFormSubmit() {
     const token = auth.getCurrentUser();
-    axios.post(
-      '/s/r/new_post',
-      { title: this.state.title, content: this.state.content },
-      { headers: { Authorization: `Bearer ${token.accessToken}` } }
-    );
+    axios
+      .post(
+        '/s/r/new_post',
+        { title: this.state.title, content: this.state.content },
+        { headers: { Authorization: `Bearer ${token.accessToken}` } }
+      )
+      .then(this.props.history.push('/u/'))
+      .then(window.location.reload());
   }
 
   render() {

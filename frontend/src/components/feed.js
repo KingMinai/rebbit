@@ -33,13 +33,16 @@ export default class Feed extends Component {
           <div className='row'>
             <div className='col' />
             <div className='col-10'>
-              {this.state.data.map((element) => {
-                let id = element._id;
-                let title = element.title;
-                let content = element.content;
-                let author = element.author;
-                return <ContentCard key={id} title={title} content={content} author={author} />;
-              })}
+              {this.state.data
+                .slice(0)
+                .reverse()
+                .map((element) => {
+                  let id = element._id;
+                  let title = element.title;
+                  let content = element.content;
+                  let author = element.author;
+                  return <ContentCard key={id} title={title} content={content} author={author} />;
+                })}
             </div>
             <div className='col' />
           </div>

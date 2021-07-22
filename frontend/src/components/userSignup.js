@@ -29,9 +29,11 @@ class UserSignup extends Component {
     this.setState({ password: event.target.value });
   }
 
-  handleFormSubmit() {
-    AuthService.register(this.state.username, this.state.email, this.state.password);
-    this.props.history.push('/u/login');
+  handleFormSubmit(event) {
+    event.preventDefault();
+    AuthService.register(this.state.username, this.state.email, this.state.password).then(() =>
+      this.props.history.push('/u/login')
+    );
   }
 
   render() {

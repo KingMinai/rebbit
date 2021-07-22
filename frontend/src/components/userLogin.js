@@ -24,8 +24,19 @@ class UserLogin extends Component {
     this.setState({ password: event.target.value });
   }
 
-  handleFormSubmit() {
-    AuthService.login(this.state.username, this.state.password);
+  handleFormSubmit(event) {
+    event.preventDefault();
+    // let setLI = this.props.isLI;
+    // AuthService.login(this.state.username, this.state.password)
+    //   .then(this.props.history.push('/'))
+    //   .then()
+    //   .catch(console.log('error'));
+    let login = async () => {
+      await AuthService.login(this.state.username, this.state.password);
+      this.props.history.push('/');
+      window.location.reload();
+    };
+    login();
   }
 
   render() {

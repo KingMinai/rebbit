@@ -5,10 +5,6 @@ exports.home = async (req, res, next) => {
   res.json({ posts });
 };
 
-exports.post_detail = (req, res, next) => {
-  res.json({ status: 'NOT READY!' });
-};
-
 exports.post_create_post = (req, res, next) => {
   let post = new Post({
     title: req.body.title,
@@ -22,9 +18,18 @@ exports.post_create_post = (req, res, next) => {
 };
 
 exports.post_update_post = (req, res, next) => {
-  res.json({ status: 'NOT READY!' });
+  const update = await Post.findOneAndUpdate(
+    { title: req.body.titleOld, content: req.body.contentOld, author: req.user.user.username },
+    { title: req.body.titleNew, content: req.body.contentNew }
+  );
+  res.json({ update });
 };
 
 exports.post_delete_post = (req, res, next) => {
-  res.json({ status: 'NOT READY!' });
+  const del = await Post.findOneAndDelete({
+    title: req.body.title,
+    content: req.body.content,
+    author: req.user.user.username,
+  });
+  res.json({ del });
 };
