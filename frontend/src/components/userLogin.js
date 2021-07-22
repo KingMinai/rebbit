@@ -7,6 +7,7 @@ class UserLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      incorrectInfo: false,
       username: '',
       email: '',
       password: '',
@@ -25,11 +26,15 @@ class UserLogin extends Component {
   }
 
   handleFormSubmit(event) {
-    event.preventDefault();
     let login = async () => {
-      await AuthService.login(this.state.username, this.state.password);
-      this.props.history.push('/');
-      window.location.reload();
+      event.preventDefault();
+      try {
+        await AuthService.login(this.state.username, this.state.password);
+        this.props.history.push('/');
+        window.location.reload();
+      } catch {
+        this.setState({ incorrectInfo: true });
+      }
     };
     login();
   }
@@ -48,7 +53,11 @@ class UserLogin extends Component {
                   className='d-inline-block align-center logo'
                   alt=''
                 />
-                <h5 className='mt-3'>Enter your username and password to login</h5>
+                <h5 className='mt-3'>
+                  {this.state.incorrectInfo
+                    ? 'Please check your info and try again'
+                    : 'Enter your username and password to login'}
+                </h5>
                 <form onSubmit={this.handleFormSubmit}>
                   <div className='form-input'>
                     {' '}

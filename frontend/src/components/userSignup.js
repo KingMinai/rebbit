@@ -30,8 +30,8 @@ class UserSignup extends Component {
   }
 
   handleFormSubmit(event) {
-    event.preventDefault();
     let signup = async () => {
+      event.preventDefault();
       await AuthService.register(this.state.username, this.state.email, this.state.password);
       this.props.history.push('/u/login');
       window.location.reload();
