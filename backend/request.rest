@@ -1,0 +1,30 @@
+POST http://localhost:5000/su/signup 
+Content-Type: application/json
+
+{
+  "username": "bar324",
+  "email": "bar324@gmail.com",
+  "password": "bar324Pass"
+}
+
+###
+GET http://localhost:5000/s/r/
+
+###
+POST http://localhost:5000/su/login
+Content-Type: application/json
+
+{
+  "username": "sam",
+  "password": "samPass"
+}
+
+###
+POST http://localhost:5000/s/r/new_post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoic2FtIn0sImlhdCI6MTYyNjc0NDY2MiwiZXhwIjoxNjI2NzQ1NjYyfQ.nhMrA9ZKdnB2GHzcKHNVsdFx0dO6LpWvJBWnZwWdL8s
+
+Content-Type: application/json
+{
+  "title": "Test",
+  "content": ""
+}
