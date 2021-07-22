@@ -28,7 +28,7 @@ class Navbar extends Component {
             rebbit
           </a>
 
-          <div className='collapse navbar-collapse' id='navbarNav'>
+          <div className='navbar-collapse' id='navbarNav'>
             <ul className='navbar-nav'>
               <li className='nav-item active'>
                 <a

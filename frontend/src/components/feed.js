@@ -9,6 +9,7 @@ export default class Feed extends Component {
     this.state = {
       data: [],
     };
+    this.setPostId = this.setPostId.bind(this);
   }
 
   componentDidMount = () => {
@@ -25,6 +26,9 @@ export default class Feed extends Component {
         });
     }
   };
+  setPostId(id) {
+    this.props.postId(id);
+  }
 
   render() {
     return (
@@ -41,7 +45,17 @@ export default class Feed extends Component {
                   let title = element.title;
                   let content = element.content;
                   let author = element.author;
-                  return <ContentCard key={id} title={title} content={content} author={author} />;
+                  return (
+                    <ContentCard
+                      key={id}
+                      i={id}
+                      title={title}
+                      content={content}
+                      author={author}
+                      type={this.props.type}
+                      postId={this.setPostId}
+                    />
+                  );
                 })}
             </div>
             <div className='col' />
