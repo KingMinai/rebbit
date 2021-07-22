@@ -25,6 +25,7 @@ class UserLogin extends Component {
   }
 
   handleFormSubmit(event) {
+    event.preventDefault();
     let login = async () => {
       await AuthService.login(this.state.username, this.state.password);
       this.props.history.push('/');
