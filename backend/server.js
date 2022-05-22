@@ -1,26 +1,29 @@
-var path = require('path');
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({ path: __dirname + '/.env' });
 }
-var createError = require('http-errors');
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
 
-var app = express();
+const app = express();
+app.use(express.json());
 
-//Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = process.env.mongoURI;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-mongoose.set('useCreateIndex', true);
+const port = process.env.PORT || 5000;
 
+mongoose
+  .connect(process.env.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    poolSize: 1,
+  })
+  .then(() => {
+    app.listen(port);
+  });
+
+// express routes
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -53,4 +56,10 @@ app.use(function (err, req, res, next) {
   });
 });
 
-module.exports = app;
+// static files for frontend
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend', 'build')));
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'));
+  });
+}
