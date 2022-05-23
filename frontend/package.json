@@ -1,6 +1,6 @@
 {
-  "homepage": "https://rebbit-etjbtnwzn-kingminai.vercel.app/",
   "name": "rebbit",
+  "homepage": "https://rebbit-etjbtnwzn-kingminai.vercel.app/",
   "version": "1.0.0",
   "private": true,
   "proxy": "http://localhost:5000",
